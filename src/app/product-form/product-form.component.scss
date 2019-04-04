@@ -1,0 +1,18 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 70%;
+  margin: auto;
+}
+
+.add-button {
+  margin-left: 240px;
+}
+
+image {
+  height: 800px;
+  width: 800px;
+}

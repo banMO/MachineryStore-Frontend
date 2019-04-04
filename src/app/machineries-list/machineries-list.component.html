@@ -1,0 +1,77 @@
+<div class="example-container">
+  <form>
+    <label>Select a category</label>
+    <select (change)="selected($event.target.value)">
+      <option value="motocultores">motocultores</option>
+      <option value="palas">palas</option>
+      <option value="marca">marca</option>
+      <option value="modelo">modelo</option>
+      <option value="idCategoria">capacidad</option>
+      <option value="idTipoGasto">precio</option>
+    </select>
+  </form>
+</div>
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+  <div fxFlex>
+    <div style="display: inline-block; width: 200px;">
+        <label class="">Filtrar by type:</label><br>
+        <mat-form-field>
+          <mat-select [(ngModel)]="tipoMaquinaria.id" name="tipoMaquinaria" (selectionChange)="filterByType()">
+              <mat-option value="1">Pesado</mat-option>
+              <mat-option value="2">Agricola</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="form">
+      <!-- <mat-form-field>
+          </mat-select>
+      </mat-form-field> -->
+    </div>
+    <div style="display: inline-block; width: 300px;">
+        <label class="">Filtrar por Marca:</label><br>
+        <mat-form-field>
+            <input matInput placeholder="Marca" type="text" [(ngModel)]="marcaField" name="marca"
+            #marca="ngModel">
+        </mat-form-field><button (click)="filterByBrand()" mat-button>Buscar</button>
+    </div>
+    <div style="display: inline-block; width: 300px;">
+        <label class="">Filtrar por Modelo:</label><br>
+        <mat-form-field>
+            <input matInput placeholder="Modelo" type="text" [(ngModel)]="modeloField" name="modelo"
+                 #modelo="ngModel" required>
+        </mat-form-field><button (click)="FilterByModelo()" mat-button>Buscar</button>
+    </div>
+    <div style="display: inline-block; width: 300px;">
+        <label class="">Filtrar por Capacidad:</label><br>
+        <mat-form-field>
+            <input matInput placeholder="Capacidad" type="text" [(ngModel)]="capacidadField" name="capacidad"
+                 #capacidad="ngModel" required>
+        </mat-form-field><button (click)="FilterByCapacidad()" mat-button>Buscar</button>
+    </div>
+  </div>
+
+  <div fxFlex>
+    <div>
+      <h3>Catalog</h3>
+    </div>
+  </div>
+
+  <div fxFlex *ngIf="machineries">
+    <mat-grid-list [cols]="3" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let machinery of machineries">
+        <section style="display: flex;margin-bottom: auto;overflow-x: scroll;
+    ">
+        <img height="180px" src="data:image/png;base64, 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"
+             alt={{machinery.marca}} style="margin-bottom: auto;">
+            </section>
+        <mat-grid-tile-footer>
+          <h1 mat-line>{{machinery.marca | uppercase}}</h1>
+          <button style="color:red" (click)="delete(machinary)" mat-button>Eliminar</button>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

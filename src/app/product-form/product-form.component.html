@@ -1,0 +1,89 @@
+<div class="example-container">
+    <div class="form">
+        <mat-form-field>
+          <input matInput
+            placeholder="Machine name"
+            [(ngModel)]="product.nombre"
+            name="nombre"
+          >
+        </mat-form-field>
+      </div>
+
+      <!--Textarea for demo purposes-->
+      <div class="form">
+        <mat-form-field>
+          <textarea matInput placeholder="Description" [(ngModel)]="product.descripcion"
+          name="desripcion" [ngModelOptions]="{standalone: true}"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field>
+          <input matInput
+            placeholder="Stock"
+            [(ngModel)]="product.stock"
+            stock="stock"
+            [ngModelOptions]="{standalone: true}"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field>
+              <input matInput
+                placeholder="Modelo"
+                [(ngModel)]="product.modelo"
+                modelo="modelo"
+                [ngModelOptions]="{standalone: true}"
+              >
+            </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field>
+            <input matInput
+              placeholder="Marca"
+              [(ngModel)]="product.marca"
+              name="marca"
+            >
+          </mat-form-field>
+      </div>
+      <div class="form">
+          <mat-form-field>
+              <mat-label>Select a type</mat-label>
+              <mat-select [(value)]="product.idTipoMaquinaria">
+                <mat-option value="1">Pesado</mat-option>
+                <mat-option value="2">Agricola</mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field>
+          <mat-select [(ngModel)]="categoria.id" name="categoria" (selectionChange)="filterByCategory()">
+            <mat-option *ngFor="let categ of categories" [value]="categ.id">
+              {{categ.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <label for="uploadPicture" class="upload-file">
+          Add a image
+        </label>
+        <input #imageInput
+           type="file"
+          accept="image/*"
+          (change)="saveImage(imageInput)"
+         ><br>
+        <p *ngIf="currentImage">
+          <img [attr.src]="currentImage.src"
+            id="photo-id"
+            width="50px" height="50px" />
+        </p>
+      </div>
+        <div>
+            <button mat-button mat-raised-button (click)="saveProduct()" class="background-primary text-floral-white add-button">
+              Add
+            </button>
+        </div>
+</div>
+
